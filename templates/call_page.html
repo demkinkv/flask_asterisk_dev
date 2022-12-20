@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+ 
+{% block container %}
+  <div class=”top-pad”>
+    <div class="col-lg-12">
+        {% if message_call %}
+        {{ message_call }}
+        
+        {% endif %}
+        
+        <form class="form-inline" action="" method="post">
+          <div class="form-group">
+            <select class="flask_select" name="flask_select" aria-label="Default select example">
+              <option value="73812653180" selected>Open this select menu</option>
+              <option value="73812230286">rostelecom-pjsip-trunk-73812230286</option>
+              <option value="73812251300">rostelecom-pjsip-trunk-73812251300</option>
+              <option value="73812258244">rostelecom-pjsip-trunk-73812258244</option>
+              <option value="73812605575">rostelecom-pjsip-trunk-73812605575</option>
+              <option value="73812606597">rostelecom-pjsip-trunk-73812606597</option>
+              <option value="73812628600">rostelecom-pjsip-trunk-73812628600</option>
+              <option value="73812629091">rostelecom-pjsip-trunk-73812629091</option>
+              <option value="73812629101">rostelecom-pjsip-trunk-73812629101</option>
+              <option value="73812650643">rostelecom-pjsip-trunk-73812650643</option>
+              <option value="73812651093">rostelecom-pjsip-trunk-73812651093</option>
+              <option value="73812651257">rostelecom-pjsip-trunk-73812651257</option>
+              <option value="73812652154">rostelecom-pjsip-trunk-73812652154</option>
+              <option value="73812652208">rostelecom-pjsip-trunk-73812652208</option>
+              <option value="73812652496">rostelecom-pjsip-trunk-73812652496</option>
+              <option value="73812652609">rostelecom-pjsip-trunk-73812652609</option>
+              <option value="73812652629">rostelecom-pjsip-trunk-73812652629</option>
+              <option value="73812652774">rostelecom-pjsip-trunk-73812652774</option>
+              <option value="73812652777">rostelecom-pjsip-trunk-73812652777</option>
+              <option value="73812652786">rostelecom-pjsip-trunk-73812652786</option>
+              <option value="73812653012">rostelecom-pjsip-trunk-73812653012</option>
+              <option value="73812653152">rostelecom-pjsip-trunk-73812653152</option>
+              <option value="73812653180">rostelecom-pjsip-trunk-73812653180</option>
+              <option value="73812653314">rostelecom-pjsip-trunk-73812653314</option>
+              <option value="73812653394">rostelecom-pjsip-trunk-73812653394</option>
+              <option value="73812653407">rostelecom-pjsip-trunk-73812653407</option>
+              <option value="73812653413">rostelecom-pjsip-trunk-73812653413</option>
+              <option value="73812653423">rostelecom-pjsip-trunk-73812653423</option>
+              <option value="73812653447">rostelecom-pjsip-trunk-73812653447</option>
+              <option value="73812653537">rostelecom-pjsip-trunk-73812653537</option>
+              <option value="73812653584">rostelecom-pjsip-trunk-73812653584</option>
+              <option value="73812655928">rostelecom-pjsip-trunk-73812655928</option>
+              <option value="73812656290">rostelecom-pjsip-trunk-73812656290</option>
+              <option value="73812658691">rostelecom-pjsip-trunk-73812658691</option>
+              <option value="73812729055">rostelecom-pjsip-trunk-73812729055</option>
+              <option value="73812957910">rostelecom-pjsip-trunk-73812957910</option>
+              <option value="73812957911">rostelecom-pjsip-trunk-73812957911</option>
+              <option value="73812957912">rostelecom-pjsip-trunk-73812957912</option>
+              <option value="73812957913">rostelecom-pjsip-trunk-73812957913</option>
+              <option value="73812957914">rostelecom-pjsip-trunk-73812957914</option>
+              <option value="73812957915">rostelecom-pjsip-trunk-73812957915</option>
+              <option value="73812957916">rostelecom-pjsip-trunk-73812957916</option>
+              <option value="73812957917">rostelecom-pjsip-trunk-73812957917</option>
+              <option value="73812957918">rostelecom-pjsip-trunk-73812957918</option>
+              <option value="73812957919">rostelecom-pjsip-trunk-73812957919</option>
+              <option value="73812957920">rostelecom-pjsip-trunk-73812957920</option>
+              <option value="73812957921">rostelecom-pjsip-trunk-73812957921</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="inputMobile">You mobile</label>
+            <input type="text" class="form-control" name="inputMobile" id="inputMobile" placeholder="You mobile" required>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="inputAstNumber">To omgtu</label>
+            <input type="text" class="form-control" name="inputAstNumber" id="inputAstNumber" placeholder="To omgtu" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+
+
+    </div>
+  </div>
+{% endblock %}
+
+
+
+
+

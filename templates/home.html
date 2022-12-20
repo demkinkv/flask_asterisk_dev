@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+ 
+{% block container %}
+  <div class=”top-pad”>
+    <div class="col-lg-9">
+
+
+        {% for key in data %}
+        {% set a = key %}
+        {% set b = data[key] %}
+    
+        <div class="jumbotron">
+            <p class="lead"></p>
+            <p><a class="btn btn-lg btn-success" href="{{b}}" role="button">{{a}}</a>
+            </p>
+        </div>
+    
+        {% endfor %}
+
+        
+        </div>
+
+
+    </div>
+  </div>
+{% endblock %}
+
+
+
+
+

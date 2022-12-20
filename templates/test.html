@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>AJAX Form Sample</title>
+</head>
+
+<body>
+
+    <h1>AJAX Form Sample</h1>
+
+    <form id="form_ajax">
+        <h2>First Name</h2>
+        <input type="text" id="firstname">
+        <h2>Last Name</h2>
+        <input type="text" id="lastname">
+        <button type="submit" name="button">Submit</button>
+    </form>
+    
+    <div id="output"></div>
+
+    
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#form_ajax').on('submit',function(e){
+                $.ajax({
+                data : {
+                    firstname : $('#firstname').val(),
+                    lastname : $('#lastname').val(),
+                        },
+                type : 'POST',
+                url : '/test/'
+                })
+                .done(function(data){
+                $('#output').text(data.output).show();
+                });
+                e.preventDefault();
+            });
+        });
+    </script>
+
+
+<a href="#" class="link">Инфо1</a>
+<a href="#" class="link">Инфо2</a>
+<a href="#" class="link">Инфо3</a>
+<a href="#" class="link">Инфо4</a>
+<a href="#" class="link">Инфо5</a>
+
+<input type="text" id="textLink" value="">
+
+
+
+
+<script>
+    document.addEventListener('click', ({ target: t }) => {
+  if (t.matches('.link')) {
+    document.querySelector('[id="textLink"]').value = t.childNodes[0].nodeValue;
+  }
+});
+</script>
+
+
+</body>
+</html>

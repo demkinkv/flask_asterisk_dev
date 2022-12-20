@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+ 
+{% block container %}
+
+<figure class="text-center">
+    <blockquote class="blockquote">
+      <p>Update JOSN file.</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+      <cite title="Source Title">{% if message %}
+        {{ message }}
+        {% endif %}</cite>
+    </figcaption>
+  </figure>
+
+
+
+<form method='POST'>
+    <div class="mb-3">
+      <label for="exampleInputUsername" class="form-label">Username</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name='username' aria-describedby="emailHelp">
+      <div id="UsernameHelp" class="form-text">We'll never share your Username with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label" >Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name='password'>
+    </div>
+    <button type="submit" class="btn btn-primary" name='submit'>Submit</button>
+  </form>
+
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+ 
+{% block container %}
+
+
+
+
+
+  <div class=”top-pad”>
+    <div class="col-lg-12">
+      <form class="d-flex" action="" method="post">
+        <div class="btn-group">
+          <input type="radio" class="btn-check" name="lang_tr" id="lang_tr1" autocomplete="off" value="ru" checked />
+          <label class="btn btn-secondary" for="lang_tr1">Russian</label>
+        
+          <input type="radio" class="btn-check" name="lang_tr" id="lang_tr2" autocomplete="off" value="ru_655"  />
+          <label class="btn btn-secondary" for="lang_tr2">Russian_655</label>
+        
+          <input type="radio" class="btn-check" name="lang_tr" id="lang_tr3" autocomplete="off" value="en"  />
+          <label class="btn btn-secondary" for="lang_tr3">English</label>
+        </div>
+
+        <input class="form-control mr-2" name="username" for="username" type="text" placeholder="Text:" aria-label="Text">
+        <button class="btn btn-outline-success" type="submit">ОК</button>
+      </form>
+    </div>
+  </div>
+
+  {% if data %}
+  <br>
+  <section class="pb-4">
+    <div class="bg-white border rounded-5">
+      
+  <section class="w-100 p-4 text-center pb-4">
+        <div class="d-print-none">Результат (копируется нижняя строка)</div>
+        <div class="d-print-block">Оригинальный текст: {{ data2 }}</div>
+        <div class="d-print-block" id="sample" >{{ data }}</div>
+      </section>
+      
+      <div class="p-4 text-center border-top mobile-hidden">
+        <a class="btn btn-link px-3" data-mdb-toggle="collapse" href="#example4" role="button" aria-expanded="true" aria-controls="example4" data-ripple-color="hsl(0, 0%, 67%)" style="" onclick="CopyToClipboard('sample');return false;">
+          <i class="fas fa-code me-md-2"></i>
+          <span>Copy Text</span>
+        </a>
+      </div>
+      
+      
+    </div>
+  </section>
+
+    <script>
+      function CopyToClipboard(id)
+      {
+      var r = document.createRange();
+      r.selectNode(document.getElementById(id));
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(r);
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+      }
+    </script>
+  {% endif %}
+  {% endblock %}  

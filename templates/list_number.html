@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+ 
+{% block container %}
+  <div class=”top-pad”>
+    <div class="col-lg-12">
+      
+      <div class="alert alert-light" id="output" role="alert"></div> 
+
+      <div class="input-group">
+        <span class="input-group-text">Строка поиска@</span>
+        <input id='myInput' onkeyup='searchTable()' type="text" aria-label="First name" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        <div  name='myForm' id="FormSearchIP">
+        <input type="text" aria-label="Last name" class="form-control" readonly id="searchnumber" name='myForm' value=''>
+        </div>
+      </div>
+      
+      
+      <table class="table table-striped" id='myTable'>
+        <thead>
+          <tr id='TableHeader'>
+            <th scope="col">Number</th>
+            <th scope="col">Person</th>
+            <th scope="col">location</th>
+            <th scope="col">outline</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for p in data["data_number"] %}
+      
+          <tr>
+            <td><a href="#" class="linksearchnumber">{{p["number"]}}</a></td>
+            <td>{{p["user"]}}</td>
+            <td>{{p["location"]}}</td>
+            <td>{{p["outline"]}}</td>
+          </tr>
+          
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+      
+      
+    </div>
+  </div>
+      <script>
+        function searchTable() {
+            var input, filter, found, table, tr, td, i, j;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        found = true;
+                    }
+                }
+                if (found) {
+                    tr[i].style.display = "";
+                    found = false;
+                  } else if (!tr[i].id.match('^TableHeader')) {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+        </script>
+ 
+      <script type="text/javascript">
+        $(document).ready(function() {
+            $('#FormSearchIP').click('submit',function(e){
+                $.ajax({
+                data : {
+                  searchnumber : $('#searchnumber').val(),
+                        },
+                type : 'POST',
+                url : '/list_number/searchnumber/'
+                })
+                .done(function(data){
+                $('#output').text(data.output).show();
+
+                document.querySelectorAll('.alert').forEach((el) => {
+                  el.classList.remove('alert-success', 'alert-warning', 'alert-light')
+                })
+
+                document.querySelectorAll('.alert').forEach((el) => {
+                  el.classList.add(data.testState)
+                })
+                let headerElement = document.querySelector('.text');
+                headerElement.className = "data.output"; 
+                });
+                e.preventDefault();
+            });
+        });
+    </script>
+
+
+
+
+<script>
+  document.addEventListener('click', ({ target: t }) => {
+if (t.matches('.linksearchnumber')) {
+  document.querySelector('[id="searchnumber"]').value = t.childNodes[0].nodeValue;
+}
+});
+</script>
+{% endblock %}
+
+
+
+
+

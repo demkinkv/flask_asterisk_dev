@@ -202,7 +202,6 @@ class CFunc_ast_to_number:
             else:
                 new_dict[i.rstrip().lstrip()] = dict2[i].rstrip().lstrip()
         del new_dict['9999']
-
         # формирования json массива
         data_number_db = {}
         data_number_db['data_number'] = []

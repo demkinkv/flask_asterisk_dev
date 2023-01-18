@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-import configparser, pathlib
-import paramiko
-import json
+import configparser, pymysql.cursors, pathlib, sqlite3, paramiko, json
 
 #* функция ssh_connection
 class CFunc_conn:
@@ -188,25 +186,28 @@ class CFunc_translitizator:
 class CFunc_ast_to_number:
     @staticmethod
     def ast_to_number():
-        resultdata = CFunc_conn.paramiko_conn(f"asterisk -rx 'database showkey cidname'")
-        liner= resultdata.decode("utf-8")
-        chars = ["'", ",", "\n"]
-        res = liner.translate(str.maketrans({ord(x): '' for x in chars}))
-        b = ''.join(res).replace("/AMPUSER/", ";").replace("/cidname", "").replace(";", "", 1).replace("resultsfound.", "", 1)
-        b2 = " ".join(b.split())
-        dict2 = dict(item.split(":") for item in b2.split(";"))
-        new_dict = {}
-        for i in dict2.keys():
-            if type(dict2[i]) is list:
-                new_dict[i.rstrip().lstrip()] = [j.rstrip().lstrip() for j in dict2[i]]
-            else:
-                new_dict[i.rstrip().lstrip()] = dict2[i].rstrip().lstrip()
-        del new_dict['9999']
+        path_config = Path(pathlib.Path.cwd(), 'config.ini')
+        config = configparser.ConfigParser()
+        config.read(path_config, encoding='utf-8-sig')
+        connection = pymysql.connect(host=config.get('mysql', 'host'),
+                            user=config.get('mysql', 'user'),
+                            passwd=config.get('mysql', 'password'),
+                            database=config.get('mysql', 'database'),
+                            charset="utf8mb4")
+        
+        with connection:
+            with connection.cursor() as cursor:
+            # Read a single record
+                sql = "SELECT `user`, `description` FROM `devices` ORDER BY `user`;"
+                cursor.execute(sql,)
+                result = cursor.fetchall()
+
         # формирования json массива
         data_number_db = {}
         data_number_db['data_number'] = []
-        for d2 in new_dict:
-            b_dict_ast = CFunc_translitizator.translitizator(new_dict[d2], 'en')
+        for d2 in result:
+            print (d2[1])
+            b_dict_ast = CFunc_translitizator.translitizator(d2[1], 'en')
             b_dict_ast_split = b_dict_ast.split("_")
             if len(b_dict_ast_split) == 2:
                 b_dict_ast_split.append('None2')
@@ -214,18 +215,12 @@ class CFunc_ast_to_number:
                 b_dict_ast_split.append('None1')
                 b_dict_ast_split.append('None2')
             data_number_db['data_number'].append({
-                'number': d2,
+                'number': d2[0],
                 'user': b_dict_ast_split[0],
                 'location': b_dict_ast_split[1],
                 'outline' : b_dict_ast_split[2]
             })
 
-            print (f'{b_dict_ast}---{d2}')
-            new_dict[d2] = b_dict_ast
-
         with open('data_number_db.json', 'wt', encoding='utf-8') as outfile:
             json.dump(data_number_db, outfile, ensure_ascii=False, indent=4)
-        #print (new_dict)
-        with open("sample.json", 'wt', encoding='utf-8') as write_file_json:
-            json.dump(new_dict, write_file_json, ensure_ascii=False, indent=4)
-        return (new_dict)
+        return (data_number_db)

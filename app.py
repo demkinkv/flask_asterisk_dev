@@ -28,9 +28,22 @@ app = FlaskAppWrapper(flask_app)
 
 def list_number():
     message = ''
-    with open("data_number_db.json", 'rt', encoding='utf-8') as read_file_json:
-            data_json = json.load(read_file_json)
-            print(type(data_json))
+    try:
+        with open("data_number_db.json", 'rt', encoding='utf-8') as read_file_json:
+                data_json = json.load(read_file_json)
+                print(type(data_json))
+    except:
+        data_json = {
+                    "data_number": [
+                        {
+                            "number": "Error",
+                            "user": "JSON file",
+                            "location": "please",
+                            "outline": "Update JSON"
+                        }
+                        ]
+                    }
+
     return render_template('list_number.html', data=data_json)
 
 def summaryapi():
@@ -97,13 +110,7 @@ def update():
         password = request.form.get('password')
         print (username, password)
         if username == 'root' and password == 'pass':
-            dict_ast = pyCFunc.CFunc_ast_to_number.ast_to_number()
-            for d2 in dict_ast:
-                b_dict_ast = pyCFunc.CFunc_translitizator.translitizator(dict_ast[d2], 'en')
-                dict_ast[d2] = b_dict_ast
-            print (dict_ast)
-            with open("sample.json", 'wt', encoding='utf-8') as read_file_json:
-                json.dump(dict_ast, read_file_json, ensure_ascii=False, indent=4)
+            pyCFunc.CFunc_ast_to_number.ast_to_number()
             message = "Correct username and password. JSON Updates"
         else:
             message = "Wrong username or password"

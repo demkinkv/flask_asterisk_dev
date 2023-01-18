@@ -71,6 +71,7 @@
       <script type="text/javascript">
         $(document).ready(function() {
             $('#FormSearchIP').click('submit',function(e){
+                $("#output").text("Соображаю, подождите...");
                 $.ajax({
                 data : {
                   searchnumber : $('#searchnumber').val(),

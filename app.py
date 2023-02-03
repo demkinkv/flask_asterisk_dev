@@ -25,7 +25,6 @@ flask_app = Flask(__name__, static_folder='static')
 
 app = FlaskAppWrapper(flask_app)
 
-
 def list_number():
     message = ''
     try:
@@ -133,7 +132,6 @@ def test():
         return jsonify({'error': 'Missing data!'})
     return render_template('test.html')
 
-
 app.add_endpoint('/', 'list_number', list_number, methods=['GET'])
 app.add_endpoint('/list_number/', 'list_number', list_number, methods=['GET'])
 app.add_endpoint('/list_number/api/', 'summaryapi', summaryapi, methods=['POST', 'GET'])
@@ -144,7 +142,6 @@ app.add_endpoint('/update/', 'update', update,  methods=['POST', 'GET'])
 app.add_endpoint('/about', 'about', about)
 app.add_endpoint('/action', 'action', action, methods=['GET'])
 app.add_endpoint('/test/', 'test', test, methods=['GET', 'POST'])
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

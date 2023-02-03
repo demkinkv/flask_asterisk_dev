@@ -202,7 +202,7 @@ class CFunc_ast_to_number:
                 cursor.execute(sql,)
                 result = cursor.fetchall()
 
-        # формирования json массива
+        # формирования json массива с разделениями
         data_number_db = {}
         data_number_db['data_number'] = []
         for d2 in result:
@@ -219,6 +219,12 @@ class CFunc_ast_to_number:
                 'user': b_dict_ast_split[0],
                 'location': b_dict_ast_split[1],
                 'outline' : b_dict_ast_split[2]
+            })
+        data_number_db['data_number'].append({
+                'number': None,
+                'user': None,
+                'location': None,
+                'outline' : None
             })
 
         with open('data_number_db.json', 'wt', encoding='utf-8') as outfile:

@@ -3,11 +3,10 @@
 {% block container %}
   <div class=”top-pad”>
     <div class="col-lg-12">
-        {% if message_call %}
+      <h3 class="text-warning">{% if message_call %}
         {{ message_call }}
-        
-        {% endif %}
-        
+        {% endif %}</h3>
+        <h4>Выберите линию для проверки из выпадающего списка. Введите номер телефона через 8-ку в ввиде 89001234567, ниже внутренный телефон (4-х значный). Сначала звонок пойдёт через выбранную линию на сотовый, если вызываемый абонент ответит, то дазвон пойдёт на внутренний телефон OMGTU.</h4>
         <form class="form-inline" action="" method="post">
           <div class="form-group">
             <select class="flask_select" name="flask_select" aria-label="Default select example">
@@ -61,7 +60,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="sr-only" for="inputMobile">You mobile</label>
+            <label class="sr-only" for="inputMobile">Номер сотового телефона, на который поступит звонок (8900123456)</label>
             <input type="text" class="form-control" name="inputMobile" id="inputMobile" placeholder="You mobile" required>
           </div>
           <div class="form-group">
